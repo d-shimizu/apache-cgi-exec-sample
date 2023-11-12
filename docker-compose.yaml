@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  httpd:
+    image: httpd:2.4-alpine
+    volumes:
+      - type: bind
+        source: apache2/conf/httpd.conf
+        target: /usr/local/apache2/conf/httpd.conf
+      - type: bind
+        source: ./apache2/conf/extra/httpd-vhosts.conf
+        target: /usr/local/apache2/conf/extra/httpd-vhosts.conf
+      - type: bind
+        source: ./apache2/vhosts/localhost
+        target: /usr/local/apache2/vhosts/localhost
+    ports:
+      - "20080:80"
